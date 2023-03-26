@@ -21,7 +21,7 @@ public class ConfigurationDao extends Dao{
         super();
     }
     
-        public ArrayList<ProgressiveLevel> getAllProgressiveLevel() {
+    public ArrayList<ProgressiveLevel> getAllProgressiveLevel() {
         String sql = "SELECT * FROM progressive_level";
         ArrayList<ProgressiveLevel> result = new ArrayList<>();
         try {
@@ -29,15 +29,38 @@ public class ConfigurationDao extends Dao{
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 ProgressiveLevel progressiveLevel = new ProgressiveLevel();
+                progressiveLevel.setId(rs.getInt("id"));
                 progressiveLevel.setLevel(rs.getInt("level"));
                 progressiveLevel.setQuantity(rs.getInt("quantity"));
                 progressiveLevel.setPrice(rs.getInt("price"));
+                progressiveLevel.setType(rs.getString("type"));
                 result.add(progressiveLevel);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return result;
+    }
+    
+    public ProgressiveLevel getProgressiveLevelById(int id){
+        String query = "SELECT * FROM progressive_level WHERE id=?";
+        ProgressiveLevel progressiveLevel = new ProgressiveLevel();
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            System.out.println(rs);
+            while (rs.next()) {
+                progressiveLevel.setId(rs.getInt("id"));
+                progressiveLevel.setLevel(rs.getInt("level"));
+                progressiveLevel.setQuantity(rs.getInt("quantity"));
+                progressiveLevel.setPrice(rs.getInt("price"));
+                progressiveLevel.setType(rs.getString("type"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return progressiveLevel;
     }
     
 }

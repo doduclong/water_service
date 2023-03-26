@@ -45,7 +45,6 @@
                             <td>
                                 <c:out value="${customer.address}" />
                             </td>
-                            <td><a href="<%=request.getContextPath()%>/settlement.jsp">Tất toán</a></td>
                         </tr>
                     </c:forEach>
                     <!-- } -->

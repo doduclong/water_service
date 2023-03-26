@@ -17,9 +17,11 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
+                        <th>Id</th>
                         <th>Mức</th>
                         <th>Mức nước sử dụng</th>
                         <th>Giá</th>
+                        <th>Loại</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,6 +29,9 @@
                     <c:forEach var="progressive" items="${listProgressive}">
 
                         <tr>
+                            <td>
+                                <c:out value="${progressive.id}" />
+                            </td>
                             <td>
                                 <c:out value="${progressive.level}" />
                             </td>
@@ -36,13 +41,18 @@
                             <td>
                                 <c:out value="${progressive.price}" />
                             </td>
-                            <td><a href="<%=request.getContextPath()%>/settlement.jsp">Tất toán</a></td>
+                            <td>
+                                <c:out value="${progressive.type}" />
+                            </td>
+                            <td>
+                                <a href="/WaterServiceApplication/update?id=<c:out value="${progressive.id }"/>">Update</a>
+                            </td>
                         </tr>
                     </c:forEach>
                     <!-- } -->
                 </tbody>
-
             </table>
+     
         </div>
     </body>
 </html>

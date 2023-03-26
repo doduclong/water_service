@@ -18,6 +18,14 @@ public class ProgressiveLevel {
     public ProgressiveLevel() {
     }
 
+    public ProgressiveLevel(int id, int level, int quantity, int price, String type) {
+        this.id = id;
+        this.level = level;
+        this.quantity = quantity;
+        this.price = price;
+        this.type = type;
+    }
+
     public ProgressiveLevel(int level, int quantity, int price, String type) {
         this.quantity = quantity;
         this.price = price;

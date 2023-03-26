@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller;
+
 import dao.ConfigurationDao;
 import dao.CustomerDao;
 import java.io.IOException;
@@ -21,17 +22,13 @@ import model.ProgressiveLevel;
  *
  * @author doduc
  */
-@WebServlet(name = "ConfigurationServlet", urlPatterns = {"/configuration"})
-public class ConfigurationServlet extends HttpServlet{
+@WebServlet("/update")
+public class UpdateProgressiveLevel extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-        ConfigurationDao configurationDao = new ConfigurationDao();
-        List<ProgressiveLevel> listProgressive  = configurationDao.getAllProgressiveLevel();
-        request.setAttribute("listProgressive", listProgressive);
-        RequestDispatcher rd = request.getRequestDispatcher("configuration.jsp");
-        rd.forward(request, response);
+            doPost(request, response);
     }
 
     /**
@@ -44,14 +41,12 @@ public class ConfigurationServlet extends HttpServlet{
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
-    {
-        int id = Integer.parseInt(request.getParameter("id"));
+            throws ServletException, IOException {
+        
+        int id = Integer.parseInt( request.getParameter("id"));
         ConfigurationDao configurationDao = new ConfigurationDao();
-        List<ProgressiveLevel> listProgressive  = configurationDao.getAllProgressiveLevel();
         ProgressiveLevel progressiveLevel  = configurationDao.getProgressiveLevelById(id);
         request.setAttribute("progressiveLevel", progressiveLevel);
-        request.setAttribute("listProgressive", listProgressive);
         RequestDispatcher rd = request.getRequestDispatcher("updateProgressiveLevel.jsp");
         rd.forward(request, response);
     }
