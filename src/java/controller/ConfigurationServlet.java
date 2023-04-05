@@ -6,6 +6,7 @@ package controller;
 import dao.ConfigurationDao;
 import dao.CustomerDao;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,7 +30,22 @@ public class ConfigurationServlet extends HttpServlet{
     {
         ConfigurationDao configurationDao = new ConfigurationDao();
         List<ProgressiveLevel> listProgressive  = configurationDao.getAllProgressiveLevel();
+        List<ProgressiveLevel> listProgressiveSh = new ArrayList<>();
+        ProgressiveLevel progressiveSx = new ProgressiveLevel();
+        ProgressiveLevel progressiveKd = new ProgressiveLevel();
+        for(int i=0; i<listProgressive.size(); i++){
+            if(listProgressive.get(i).getType().equalsIgnoreCase("kd")){
+                progressiveKd = listProgressive.get(i);
+                listProgressive.remove(listProgressive.get(i));
+            }
+            if(listProgressive.get(i).getType().equalsIgnoreCase("sx")){
+                progressiveSx = listProgressive.get(i);
+                listProgressive.remove(listProgressive.get(i));
+            }
+        }
         request.setAttribute("listProgressive", listProgressive);
+        request.setAttribute("progressiveSx", progressiveSx);
+        request.setAttribute("progressiveKd", progressiveKd);
         RequestDispatcher rd = request.getRequestDispatcher("configuration.jsp");
         rd.forward(request, response);
     }
@@ -46,14 +62,7 @@ public class ConfigurationServlet extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-        int id = Integer.parseInt(request.getParameter("id"));
-        ConfigurationDao configurationDao = new ConfigurationDao();
-        List<ProgressiveLevel> listProgressive  = configurationDao.getAllProgressiveLevel();
-        ProgressiveLevel progressiveLevel  = configurationDao.getProgressiveLevelById(id);
-        request.setAttribute("progressiveLevel", progressiveLevel);
-        request.setAttribute("listProgressive", listProgressive);
-        RequestDispatcher rd = request.getRequestDispatcher("updateProgressiveLevel.jsp");
-        rd.forward(request, response);
+
     }
 
     /**

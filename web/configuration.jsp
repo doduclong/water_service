@@ -14,13 +14,13 @@
             <h3 class="text-center">Cấu hình giá nước</h3>
             <hr>
             <br>
+            <h4 class="text-center">Giá nước sinh hoạt</h4>
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Mức</th>
                         <th>Mức nước sử dụng</th>
-                        <th>Giá</th>
+                        <th>Giá(vnđ/m3)</th>
                         <th>Loại</th>
                     </tr>
                 </thead>
@@ -30,29 +30,62 @@
 
                         <tr>
                             <td>
-                                <c:out value="${progressive.id}" />
-                            </td>
-                            <td>
                                 <c:out value="${progressive.level}" />
                             </td>
                             <td>
                                 <c:out value="${progressive.quantity}" />
                             </td>
                             <td>
-                                <c:out value="${progressive.price}" />
+                                <c:out value="${progressive.price}"/>
                             </td>
                             <td>
-                                <c:out value="${progressive.type}" />
-                            </td>
-                            <td>
-                                <a href="/WaterServiceApplication/update?id=<c:out value="${progressive.id }"/>">Update</a>
+                                <a href="/WaterServiceApplication/update?id=<c:out value="${progressive.id }"/>">Cập nhật</a>
                             </td>
                         </tr>
                     </c:forEach>
                     <!-- } -->
                 </tbody>
             </table>
-     
+            <h4 class="text-center">Giá nước kinh doanh</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Giá(vnđ/m3)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--   for (Todo todo: todos) {  -->
+                        <tr>
+                            <td>
+                                <c:out value="${progressiveKd.price}" />
+                            </td>
+                            <td>
+                                <a href="/WaterServiceApplication/update?id=<c:out value="${progressiveKd.id }"/>">Cập nhật</a>
+                            </td>
+                        </tr>
+                    <!-- } -->
+                </tbody>
+            </table>
+            <h4 class="text-center">Giá nước sản xuất</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Giá(vnđ/m3)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--   for (Todo todo: todos) {  -->
+                        <tr>
+                            <td>
+                                <c:out value="${progressiveSx.price}" />
+                            </td>
+                            <td>
+                                <a href="/WaterServiceApplication/update?id=<c:out value="${progressiveSx.id }"/>">Cập nhật</a>
+                            </td>
+                        </tr>
+                    <!-- } -->
+                </tbody>
+            </table>
         </div>
     </body>
 </html>

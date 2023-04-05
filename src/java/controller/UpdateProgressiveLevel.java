@@ -28,7 +28,12 @@ public class UpdateProgressiveLevel extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-            doPost(request, response);
+        int id = Integer.parseInt( request.getParameter("id"));
+        ConfigurationDao configurationDao = new ConfigurationDao();
+        ProgressiveLevel progressiveLevel  = configurationDao.getProgressiveLevelById(id);
+        request.setAttribute("progressiveLevel", progressiveLevel);
+        RequestDispatcher rd = request.getRequestDispatcher("updateProgressiveLevel.jsp");
+        rd.forward(request, response);
     }
 
     /**
@@ -43,12 +48,21 @@ public class UpdateProgressiveLevel extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        int id = Integer.parseInt( request.getParameter("id"));
-        ConfigurationDao configurationDao = new ConfigurationDao();
-        ProgressiveLevel progressiveLevel  = configurationDao.getProgressiveLevelById(id);
-        request.setAttribute("progressiveLevel", progressiveLevel);
-        RequestDispatcher rd = request.getRequestDispatcher("updateProgressiveLevel.jsp");
-        rd.forward(request, response);
+//        int id = Integer.parseInt( request.getParameter("id"));
+//        ConfigurationDao configurationDao = new ConfigurationDao();
+//        ProgressiveLevel progressiveLevel  = configurationDao.getProgressiveLevelById(id);
+//        request.setAttribute("progressiveLevel", progressiveLevel);
+//        RequestDispatcher rd = request.getRequestDispatcher("updateProgressiveLevel.jsp");
+//        rd.forward(request, response);
+            String sid = request.getParameter("id");
+            String slevel = request.getParameter("level");
+            String squantity = request.getParameter("quantity");
+            String sprice = request.getParameter("price");
+            String stype = request.getParameter("type");
+            
+            ConfigurationDao dao = new ConfigurationDao();
+            dao.updateProgressiveLevel(Integer.parseInt(sid), Integer.parseInt(slevel), Integer.parseInt(squantity), Integer.parseInt(sprice), stype);
+            response.sendRedirect("configuration");
     }
 
     /**

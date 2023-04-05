@@ -41,7 +41,7 @@
                     
                     <tr>
                         <td>Loại</td>
-                        <td><input value="<c:out value="${progressiveLevel.type}" />" type="text" name="type"></td>
+                        <td><input value="<c:out value="${progressiveLevel.type}" />" type="text" name="type" readonly></td>
                     </tr>
                     <tr>
                         <td></td>

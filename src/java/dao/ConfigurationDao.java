@@ -63,4 +63,20 @@ public class ConfigurationDao extends Dao{
         return progressiveLevel;
     }
     
+    public void updateProgressiveLevel(int id, int level, int quantity, int price, String type){
+        String query = "UPDATE progressive_level SET level=?, quantity=?, price=?, type=? WHERE id=?";
+        try{
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, level);
+            ps.setInt(2, quantity);
+            ps.setInt(3, price);
+            ps.setString(4, type);
+            ps.setInt(5, id);
+            ps.executeUpdate();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    
 }
